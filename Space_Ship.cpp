@@ -1,26 +1,24 @@
-#ifndef SPACE_SHIP_HPP
-#define SPACE_SHIP_HPP
+#include "Space_Ship.hpp"
 
-struct Locatin
+
+Space_Ship::Space_Ship(/* args */)
 {
-    int _X;
-    int _Y;
-};
+}
 
-class Space_Ship
+void Space_Ship::_set_Location(int x , int y)
 {
-private:
+    this->_locatin._X = x;
+    this->_locatin._Y = y;
+}
 
-   Locatin _locatin;
+Locatin  Space_Ship::_get_Location()
+{
+    return this->_locatin;
+}
 
-public:
-    Space_Ship(/* args */);
 
-    void _set_Location(int x , int y);
-    Locatin  _get_Location();
-
-    void _move(int up , int right , int down , int left);
-
-};
-
-#endif
+void Space_Ship::_move(int up , int right , int down , int left)
+{
+    this->_locatin._X += (right - left);
+    this->_locatin._Y += (up - down); 
+}
