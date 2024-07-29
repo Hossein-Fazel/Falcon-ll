@@ -1,11 +1,7 @@
+#include "DataStruct__Func.hpp"
+
 #ifndef SPACE_SHIP_HPP
 #define SPACE_SHIP_HPP
-
-struct Locatin
-{
-    int _X;
-    int _Y;
-};
 
 class Space_Ship
 {
