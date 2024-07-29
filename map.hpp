@@ -11,7 +11,7 @@ class Map
         void resize(int x, int y);
         void set_data(int x ,int y, int data);
         void set_info(int x, int y);
-
+        
 
     private:
         vector<vector<int>> main_map;
