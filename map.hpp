@@ -13,6 +13,8 @@ class Map
         void set_data(int x ,int y, int data);
         void set_info(int x, int y);
         int get_data(int x, int y);
+
+        vector<vector<int>> __get_main_map(){return main_map;}; // can i do this?
         
         space_current detect_sc(int x, int y, int pre_x, int pre_y);
 

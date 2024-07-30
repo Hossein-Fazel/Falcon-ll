@@ -13,5 +13,4 @@ struct space_current
     int cell_counter = 0;
 };
 
-
 #endif

@@ -16,3 +16,38 @@ void ride(Space_Ship ss, Map my_map)
         ss._set_time(ss._get_time() - time_spent);
     }
 }
+
+void space_object(Space_Ship ss , Map my_map)
+{
+        if(my_map.__get_main_map()[ss._get_Location()._X + 1][ss._get_Location()._Y] == 3)
+        {
+            ss._move(0,3,0,0);
+            ss._set_energy(ss._get_energy() - 12); // if we get logic error then could be here!
+            ss._set_time  (ss._get_time() - 9);
+            return;
+        } 
+
+        if(my_map.__get_main_map()[ss._get_Location()._X - 1][ss._get_Location()._Y] == 3)
+        {
+            ss._move(0,0,0,3);
+            ss._set_energy(ss._get_energy() - 12); 
+            ss._set_time  (ss._get_time() - 9);
+            return;
+        } 
+
+        if(my_map.__get_main_map()[ss._get_Location()._X][ss._get_Location()._Y + 1] == 3)
+        {
+            ss._move(0,0,3,0);
+            ss._set_energy(ss._get_energy() - 12); 
+            ss._set_time  (ss._get_time() - 9);
+            return;
+        } 
+
+        if(my_map.__get_main_map()[ss._get_Location()._X][ss._get_Location()._Y-1] == 3)
+        {
+            ss._move(3,0,0,0);
+            ss._set_energy(ss._get_energy() - 12); 
+            ss._set_time  (ss._get_time() - 9);
+            return;
+        } 
+}
