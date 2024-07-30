@@ -8,7 +8,9 @@ using namespace std;
 struct SaveThings
 {
     Location __location; //from DataStruct__Func.hpp
-    std::string _next_move;
+    string _next_move;
+    int _energy_left;
+    int _time_left;
     //What I See? variable
 };
 
