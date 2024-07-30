@@ -14,6 +14,9 @@ class Map
         void set_info(int x, int y);
         int get_data(int x, int y);
 
+        int _get_row() {return row;}
+        int _get_column(){return column;}
+
         vector<vector<int>> __get_main_map(){return main_map;}; // can i do this?
         
         space_current detect_sc(int x, int y, int pre_x, int pre_y);

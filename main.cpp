@@ -51,3 +51,22 @@ void space_object(Space_Ship ss , Map my_map)
             return;
         } 
 }
+
+void worm_hole(Space_Ship ss , Map my_map)
+{
+    if (my_map.__get_main_map()[ss._get_Location()._X][ss._get_Location()._Y] == 4)
+    {
+        Location sec_Four_loc;
+        for (int i{0} ; i < my_map._get_row() ;i++ )
+        {
+            for (int j{0} ; j < my_map._get_column() ;j++ )
+            {
+                if (my_map.__get_main_map()[i][j] == 4 && j != ss._get_Location()._Y && i != ss._get_Location()._X )
+                {
+                    ss._set_Location(i,j);
+                    return;
+                }
+            }
+        }
+    }
+}
