@@ -60,3 +60,51 @@ void Map::set_info(int x, int y)
             visited_map[x + 1][y - 1] = main_map[x][y - 1];
     }
 }
+
+space_current Map::detect_sc(int x, int y, int pre_x, int pre_y)
+{
+    space_current ans;
+
+    if(x + 1 < row and (main_map[x + 1][y] == 1 or main_map[x + 1][y] == 2) and !(x + 1 == pre_x and y == pre_y))
+    {
+        ans = detect_sc(x + 1, y, x ,y);
+        if(ans.cell_counter != -1)
+        {
+            ans.cell_counter++;
+            return ans;
+        }
+    }
+
+    if(x - 1 >= 0 and (main_map[x - 1][y] == 1 or main_map[x - 1][y] == 2) and !(x - 1 == pre_x and y == pre_y))
+    {
+        ans = detect_sc(x - 1, y, x ,y);
+        if(ans.cell_counter != -1)
+        {
+            ans.cell_counter++;
+            return ans;
+        }
+    }
+
+    if(y + 1 < column and (main_map[x][y + 1] == 1 or main_map[x][y + 1] == 2) and !(x == pre_x and y + 1 == pre_y))
+    {
+        ans = detect_sc(x, y + 1, x ,y);
+        if(ans.cell_counter != -1)
+        {
+            ans.cell_counter++;
+            return ans;
+        }
+    }
+
+    if(y - 1 >= 0 and (main_map[x][y - 1] == 1 or main_map[x][y - 1] == 2) and !(x == pre_x and y - 1 == pre_y)) 
+    {
+        ans = detect_sc(x, y - 1, x ,y);
+        if(ans.cell_counter != -1)
+        {
+            ans.cell_counter++;
+            return ans;
+        }
+    }
+
+    if(main_map[x][y] == 1) return space_current{Location{x, y}, 1};
+    return space_current{Location{0, 0}, -1};
+}
