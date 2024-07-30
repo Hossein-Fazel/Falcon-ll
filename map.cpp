@@ -105,6 +105,6 @@ space_current Map::detect_sc(int x, int y, int pre_x, int pre_y)
         }
     }
 
-    if(main_map[x][y] == 1) return space_current{Location{x, y}, 1};
+    if(main_map[x][y] == 1) return space_current{Location{x, y}, 0};
     return space_current{Location{0, 0}, -1};
 }
