@@ -7,5 +7,12 @@ struct Location
     int _Y;
 };
 
+struct space_current
+{
+    Location end_point;
+    int time_spent;
+    int energy_consumption;
+};
+
 
 #endif
