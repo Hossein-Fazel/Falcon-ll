@@ -10,8 +10,7 @@ struct Location
 struct space_current
 {
     Location end_point;
-    int time_spent;
-    int energy_consumption;
+    int cell_counter = 0;
 };
 
 
