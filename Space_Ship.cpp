@@ -10,8 +10,8 @@ Space_Ship::Space_Ship(int x , int y , int energy , int time)
 
 void Space_Ship::_set_Location(int x , int y)
 {
-    this->_locatin._X = x;
-    this->_locatin._Y = y;
+    this->_location._X = x;
+    this->_location._Y = y;
 }
 void Space_Ship::_set_energy(int energy)
 {
@@ -23,9 +23,9 @@ void Space_Ship::_set_time(int time)
 }
 
 
-Locatin Space_Ship::_get_Location()
+Location Space_Ship::_get_Location()
 {
-    return this->_locatin;
+    return this->_location;
 }
 int Space_Ship::_get_energy()
 {
@@ -39,6 +39,6 @@ int Space_Ship::_get_time()
 
 void Space_Ship::_move(int up , int right , int down , int left)
 {
-    this->_locatin._X += (right - left);
-    this->_locatin._Y += (up - down); 
+    this->_location._X += (right - left);
+    this->_location._Y += (up - down); 
 }

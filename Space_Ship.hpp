@@ -7,7 +7,7 @@ class Space_Ship
 {
 private:
 
-   Locatin _locatin;
+   Location _location;
    int _energy;
    int _time;
 
@@ -18,7 +18,7 @@ public:
     void _set_energy(int energy);
     void _set_time(int time);
 
-    Locatin  _get_Location();
+    Location  _get_Location();
     int _get_energy();
     int _get_time();
 

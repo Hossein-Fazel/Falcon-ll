@@ -6,7 +6,7 @@
 
 struct SaveThings
 {
-    Locatin __location; //from DataStruct__Func.hpp
+    Location __location; //from DataStruct__Func.hpp
     std::string _next_move;
     //What I See? variable
 };
