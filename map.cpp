@@ -21,6 +21,14 @@ void Map::set_data(int x, int y, int data)
     }
 }
 
+int Map::get_data(int x, int y)
+{
+    if(x > 0 and x < this->row and y > 0 and y < this->column)
+    {
+        return this->visited_map[x][y];
+    }
+}
+
 void Map::set_info(int x, int y)
 {
     if(x > 0 and x < this->row and y > 0 and y < this->column)
