@@ -101,33 +101,58 @@ int main()
         int x = space_ship._get_Location()._X;
 
         space_map.set_info(x ,y , visited_map);
+        bool is_home = false;
 
         if(visited_map[x][y] != 0 and visited_map[x][y] != 2)
             data.push_back(visited_map[x][y]);   
 
         if(x + 1 < row and visited_map[x+1][y] != 0 and visited_map[x+1][y] != 2 )
+        {
             data.push_back(visited_map[x+1][y]); 
+            is_home = 1;
+        }
 
         if(x - 1 > 0 and visited_map[x-1][y] != 0 and visited_map[x-1][y] != 2)
+        {
             data.push_back(visited_map[x-1][y]);
+            is_home = 1;
+        }
         
         if(y + 1 < column and visited_map[x][y+1] != 0 and visited_map[x][y+1] != 2)
+        {
             data.push_back(visited_map[x][y+1]);
+            is_home = 1;
+        }
         
         if(y - 1 > 0 and visited_map[x][y-1] != 0 and visited_map[x][y-1] != 2)
+        {
             data.push_back(visited_map[x][y-1]);
+            is_home = 1;
+        }
         
         if(y + 1 < column and x + 1 < row and visited_map[x+1][y+1] != 0 and visited_map[x+1][y+1] != 2)
+        {
             data.push_back(visited_map[x+1][y+1]);
+            is_home = 1;
+        }
         
         if(x - 1 > 0 and y - 1 > 0 and visited_map[x-1][y-1] != 0 and visited_map[x-1][y-1] != 2)
+        {
             data.push_back(visited_map[x-1][y-1]);
+            is_home = 1;
+        }
 
         if(x - 1 > 0 and y + 1 < column and visited_map[x-1][y+1] != 0 and visited_map[x-1][y+1] != 2)
+        {
            data.push_back(visited_map[x-1][y+1]);
+            is_home = 1;
+        }
 
         if(x + 1 < row and y - 1 > 0 and visited_map[x+1][y-1] != 0 and visited_map[x+1][y-1] != 2)
+        {
             data.push_back(visited_map[x+1][y-1]);
+            is_home = 1;
+        }
 
 
 
