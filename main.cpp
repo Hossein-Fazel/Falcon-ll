@@ -2,6 +2,7 @@
 #include "DataStruct__Func.hpp"
 #include "Space_Ship.hpp"
 #include "map.hpp"
+#include "Log.hpp"
 
 void ride(Space_Ship ss, Map my_map)
 {
@@ -73,6 +74,7 @@ void worm_hole(Space_Ship ss , Map my_map)
 
 int main()
 {
+    log_system logs;
     vector<vector<int>> visited_map;
     int home_x , home_y;
 
@@ -196,6 +198,7 @@ int main()
             space_ship._set_Location(home_x, home_y);
             space_ship._set_energy(space_ship._get_energy() - (abs(home_x - x) + abs(home_y - y)));
             space_ship._set_time(space_ship._get_time() + (abs(home_x - x) + abs(home_y - y)));
+            logs.add(Location{x , y} , "go to home!" , space_ship._get_energy() , space_ship._get_time());
         }
         else if ( data.size() == 0)
         {
@@ -214,6 +217,9 @@ int main()
                     is_moving = false;
                 }
             } while(is_moving);
+
+            string goto_loc = "go to ("+to_string(space_ship._get_Location()._X) + "," + to_string(space_ship._get_Location()._Y)+")";
+            logs.add(Location{x , y} , goto_loc, space_ship._get_energy() , space_ship._get_time());
         }
         else
         {
@@ -224,6 +230,9 @@ int main()
                 if(thing == 1) ride(space_ship, space_map);
                 else if(thing == 3) space_object(space_ship, space_map);
                 else if(thing == 4) worm_hole(space_ship, space_map);
+
+                string goto_loc =" use " + to_string(thing) + " go to ("+to_string(space_ship._get_Location()._X) + "," + to_string(space_ship._get_Location()._Y)+")";
+                logs.add(Location{x , y} , goto_loc, space_ship._get_energy() , space_ship._get_time());
             }
             else
             {
@@ -242,8 +251,15 @@ int main()
                         is_moving = false;
                     }
                 } while(is_moving);
+                string goto_loc = "go to ("+to_string(space_ship._get_Location()._X) + "," + to_string(space_ship._get_Location()._Y)+")";
+                logs.add(Location{x , y} , goto_loc, space_ship._get_energy() , space_ship._get_time());
             }
         }
 
     } while (visited_map[space_ship._get_Location()._X][space_ship._get_Location()._Y] != 5);
+
+
+    logs.print();
+
+    return 0;
 }
