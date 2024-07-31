@@ -104,71 +104,91 @@ int main()
         space_map.set_info(x ,y , visited_map);
         bool is_home = false;
 
-        if(visited_map[x][y] != 0 and visited_map[x][y] != 2)
+        if(visited_map[x][y] == 1 or visited_map[x][y] == 4)
             data.push_back(visited_map[x][y]);   
 
-        if(x + 1 < row and visited_map[x+1][y] != 0 and visited_map[x+1][y] != 2 )
+        if(x + 1 < row )
         {
-            data.push_back(visited_map[x+1][y]); 
-            is_home = 1;
-            home_x = x + 1;
-            home_y = y;
+            if(visited_map[x+1][y] == 3) data.push_back(visited_map[x+1][y]);
+            if(visited_map[x+1][y] == 5)
+            {
+                is_home = 1;
+                home_x = x + 1;
+                home_y = y;
+            }
         }
 
-        if(x - 1 > 0 and visited_map[x-1][y] != 0 and visited_map[x-1][y] != 2)
+        if(x - 1 > 0)
         {
-            data.push_back(visited_map[x-1][y]);
-            is_home = 1;
-            home_x = x - 1;
-            home_y = y;
+            if(visited_map[x-1][y] == 3) data.push_back(visited_map[x-1][y]);
+            if(visited_map[x-1][y] == 5)
+            {
+                is_home = 1;
+                home_x = x - 1;
+                home_y = y;
+            }
         }
         
-        if(y + 1 < column and visited_map[x][y+1] != 0 and visited_map[x][y+1] != 2)
+        if(y + 1 < column)
         {
-            data.push_back(visited_map[x][y+1]);
-            is_home = 1;
-            home_x = x;
-            home_y = y + 1;
+            if(visited_map[x][y+1] == 3) data.push_back(visited_map[x][y+1]);
+            if(visited_map[x][y+1] == 5)
+            {
+                is_home = 1;
+                home_x = x;
+                home_y = y + 1;
+            }
         }
         
-        if(y - 1 > 0 and visited_map[x][y-1] != 0 and visited_map[x][y-1] != 2)
+        if(y - 1 > 0)
         {
-            data.push_back(visited_map[x][y-1]);
-            is_home = 1;
-            home_x = x;
-            home_y = y - 1;
+            if(visited_map[x][y-1] == 3) data.push_back(visited_map[x][y-1]);
+            if(visited_map[x][y-1] == 5)
+            {
+                is_home = 1;
+                home_x = x;
+                home_y = y - 1;
+            }
         }
         
-        if(y + 1 < column and x + 1 < row and visited_map[x+1][y+1] != 0 and visited_map[x+1][y+1] != 2)
+        if(y + 1 < column and x + 1 < row)
         {
-            data.push_back(visited_map[x+1][y+1]);
-            is_home = 1;
-            home_x = x + 1;
-            home_y = y + 1;
+            if(visited_map[x+1][y+1] == 5)
+            {
+                is_home = 1;
+                home_x = x + 1;
+                home_y = y + 1;
+            } 
         }
         
-        if(x - 1 > 0 and y - 1 > 0 and visited_map[x-1][y-1] != 0 and visited_map[x-1][y-1] != 2)
+        if(x - 1 > 0 and y - 1 > 0)
         {
-            data.push_back(visited_map[x-1][y-1]);
-            is_home = 1;
-            home_x = x - 1;
-            home_y = y - 1;
+            if(visited_map[x-1][y-1] == 5)
+            {
+                is_home = 1;
+                home_x = x - 1;
+                home_y = y - 1;
+            }
         }
 
-        if(x - 1 > 0 and y + 1 < column and visited_map[x-1][y+1] != 0 and visited_map[x-1][y+1] != 2)
+        if(x - 1 > 0 and y + 1 < column)
         {
-           data.push_back(visited_map[x-1][y+1]);
-            is_home = 1;
-            home_x = x - 1;
-            home_y = y + 1;
+            if(visited_map[x-1][y+1] == 5)
+            {
+                is_home = 1;
+                home_x = x - 1;
+                home_y = y + 1;
+            }
         }
 
-        if(x + 1 < row and y - 1 > 0 and visited_map[x+1][y-1] != 0 and visited_map[x+1][y-1] != 2)
+        if(x + 1 < row and y - 1 > 0)
         {
-            data.push_back(visited_map[x+1][y-1]);
-            is_home = 1;
-            home_x = x + 1;
-            home_y = y - 1;
+            if(visited_map[x+1][y-1] == 5)
+            {
+                is_home = 1;
+                home_x = x + 1;
+                home_y = y - 1;
+            }
         }
 
         if(is_home)
@@ -182,15 +202,48 @@ int main()
             bool is_moving{false};
             do
             {
-               int random_X = -1+ (rand() % 3);
-               int random_Y = -1+ (rand() % 3);
-
-                is_moving = space_ship._move(random_X , random_Y);
-                
+                try
+                {
+                    int random_X = -1 + (rand() % 3);
+                    int random_Y = -1 + (rand() % 3);
+                    if(visited_map.at(x + random_X).at(y + random_Y) != 3 and visited_map.at(x + random_X).at(y + random_Y) != 2)
+                        is_moving = space_ship._move(random_X , random_Y);
+                }
+                catch(const std::exception& e)
+                {
+                    is_moving = false;
+                }
             } while(is_moving);
         }
-
+        else
+        {
+            bool use_thing = 0 + rand() % 2;
+            if(use_thing == 1)
+            {
+                int thing = data[0 + rand() % data.size()];
+                if(thing == 1) ride(space_ship, space_map);
+                else if(thing == 3) space_object(space_ship, space_map);
+                else if(thing == 4) worm_hole(space_ship, space_map);
+            }
+            else
+            {
+                bool is_moving{false};
+                do
+                {
+                    try
+                    {
+                        int random_X = -1 + (rand() % 3);
+                        int random_Y = -1 + (rand() % 3);
+                        if(visited_map.at(x + random_X).at(y + random_Y) != 3 and visited_map.at(x + random_X).at(y + random_Y) != 2)
+                            is_moving = space_ship._move(random_X , random_Y);
+                    }
+                    catch(const std::exception& e)
+                    {
+                        is_moving = false;
+                    }
+                } while(is_moving);
+            }
+        }
 
     } while (visited_map[space_ship._get_Location()._X][space_ship._get_Location()._Y] != 5);
-    
 }
