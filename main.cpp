@@ -71,3 +71,27 @@ void worm_hole(Space_Ship ss , Map my_map)
         }
     }
 }
+
+int main()
+{
+    Map space_map;
+    int row, column, spaceShip_x, spaceShip_y, energy;
+    
+    // map data
+    cin >> row >> column;
+    space_map.resize(row, column);
+
+    // spaceship data
+    cin >> spaceShip_x >> spaceShip_y >> energy;
+    Space_Ship space_ship(spaceShip_x, spaceShip_y, energy, 0);
+
+    //getting map cells
+    for(int i = 0; i < row; i++)
+    {
+        for(int j = 0; j < column; j++)
+        {
+            int cell_data; cin >> cell_data;
+            space_map.set_data(i, j, cell_data);
+        }
+    }
+}
