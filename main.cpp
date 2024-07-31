@@ -13,7 +13,7 @@ void ride(Space_Ship ss, Map my_map)
         int time_spent = sc.cell_counter;
         ss._set_Location(sc.end_point._X, sc.end_point._Y);
         ss._set_energy(ss._get_energy() - energy_consumption);
-        ss._set_time(ss._get_time() - time_spent);
+        ss._set_time(ss._get_time() + time_spent);
     }
 }
 
@@ -23,7 +23,7 @@ void space_object(Space_Ship ss , Map my_map)
         {
             ss._move(0,3,0,0);
             ss._set_energy(ss._get_energy() - 12); // if we get logic error then could be here!
-            ss._set_time  (ss._get_time() - 9);
+            ss._set_time  (ss._get_time() + 9);
             return;
         } 
 
@@ -31,7 +31,7 @@ void space_object(Space_Ship ss , Map my_map)
         {
             ss._move(0,0,0,3);
             ss._set_energy(ss._get_energy() - 12); 
-            ss._set_time  (ss._get_time() - 9);
+            ss._set_time  (ss._get_time() + 9);
             return;
         } 
 
@@ -39,7 +39,7 @@ void space_object(Space_Ship ss , Map my_map)
         {
             ss._move(0,0,3,0);
             ss._set_energy(ss._get_energy() - 12); 
-            ss._set_time  (ss._get_time() - 9);
+            ss._set_time  (ss._get_time() + 9);
             return;
         } 
 
@@ -47,7 +47,7 @@ void space_object(Space_Ship ss , Map my_map)
         {
             ss._move(3,0,0,0);
             ss._set_energy(ss._get_energy() - 12); 
-            ss._set_time  (ss._get_time() - 9);
+            ss._set_time  (ss._get_time() + 9);
             return;
         } 
 }
