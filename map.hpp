@@ -11,7 +11,7 @@ class Map
         Map(int x, int y);
         void resize(int x, int y);
         void set_data(int x ,int y, int data);
-        void set_info(int x, int y);
+        void set_info(int x, int y , vector<vector<int>> & visited_map);
         int get_data(int x, int y);
 
         int _get_row() {return row;}
@@ -25,7 +25,6 @@ class Map
 
     private:
         vector<vector<int>> main_map;
-        vector<vector<int>> visited_map;
         int column, row;
 };
 

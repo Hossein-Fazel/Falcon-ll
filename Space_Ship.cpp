@@ -37,8 +37,13 @@ int Space_Ship::_get_time()
 }
 
 
-void Space_Ship::_move(int up , int right , int down , int left)
+bool Space_Ship::_move(int up , int right)
 {
-    this->_location._X += (right - left);
-    this->_location._Y += (up - down); 
+    if( up + right != 0)
+    {
+        this->_location._X += (right);
+        this->_location._Y += (up);
+        return 1;
+    }
+    return 0;
 }

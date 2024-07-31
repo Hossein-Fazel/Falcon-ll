@@ -25,6 +25,6 @@ void log_system::print()
         cout << "Elapsed time     :  " << item._elapsed_time << endl;
         // cout << "What i see ?"
         cout << "The next move    :  " << item._next_move << endl;
-        cout << "\t\t********************************** \n\n";
+        cout << "\t\t ______________________________________ \n\n";
     }
 }

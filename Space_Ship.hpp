@@ -23,7 +23,7 @@ public:
     int _get_time();
 
 
-    void _move(int up , int right , int down , int left);
+    bool _move(int up , int right);
 
 };
 

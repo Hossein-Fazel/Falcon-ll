@@ -3,7 +3,6 @@
 void Map::resize(int x, int y)
 {
     this->main_map.assign(x, vector<int>(y, 0));
-    this->visited_map.assign(x, vector<int>(y, 0));
     this->row = x;
     this->column = y;
 }
@@ -25,11 +24,11 @@ int Map::get_data(int x, int y)
 {
     if(x > 0 and x < this->row and y > 0 and y < this->column)
     {
-        return this->visited_map[x][y];
+        return this->main_map[x][y];
     }
 }
 
-void Map::set_info(int x, int y)
+void Map::set_info(int x, int y , vector<vector<int>> & visited_map)
 {
     if(x > 0 and x < this->row and y > 0 and y < this->column)
     {
