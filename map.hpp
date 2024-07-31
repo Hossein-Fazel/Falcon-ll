@@ -17,7 +17,8 @@ class Map
         int _get_row() {return row;}
         int _get_column(){return column;}
 
-        vector<vector<int>> __get_main_map(){return main_map;}; // can i do this?
+        const vector<vector<int>> __get_main_map(){return main_map;};
+        // can i do this? no its violates the principles of oop but with 'const', i think it could be better
         
         space_current detect_sc(int x, int y, int pre_x, int pre_y);
 
