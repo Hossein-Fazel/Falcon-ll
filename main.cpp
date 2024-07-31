@@ -157,16 +157,15 @@ int main()
 
         if ( data.size() == 0)
         {
-            int random_X;
-            int random_Y;
+            bool is_moving{false};
             do
             {
-                random_X = -1+ (rand() % 3);
-                random_Y = -1+ (rand() % 3);
+               int random_X = -1+ (rand() % 3);
+               int random_Y = -1+ (rand() % 3);
 
-                space_ship._move(random_X , random_Y);
+                is_moving = space_ship._move(random_X , random_Y);
                 
-            } while( space_ship._move(random_X,random_Y));
+            } while(is_moving);
         }
 
 
