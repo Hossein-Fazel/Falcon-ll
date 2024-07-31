@@ -108,26 +108,26 @@ int main()
         if(x + 1 < row and visited_map[x+1][y] != 0 and visited_map[x+1][y] != 2 )
             data.push_back(visited_map[x+1][y]); 
 
-        if(x - 1 > 0 and visited_map[x+1][y] != 0 and visited_map[x+1][y] != 2)
+        if(x - 1 > 0 and visited_map[x-1][y] != 0 and visited_map[x-1][y] != 2)
             data.push_back(visited_map[x-1][y]);
         
-        if(y + 1 < column and visited_map[x+1][y] != 0 and visited_map[x+1][y] != 2)
-            data.push_back(visited_map[x][y + 1]);
+        if(y + 1 < column and visited_map[x][y+1] != 0 and visited_map[x][y+1] != 2)
+            data.push_back(visited_map[x][y+1]);
         
-        if(y - 1 > 0 and visited_map[x+1][y] != 0 and visited_map[x+1][y] != 2)
-            data.push_back(visited_map[x][y - 1]);
+        if(y - 1 > 0 and visited_map[x][y-1] != 0 and visited_map[x][y-1] != 2)
+            data.push_back(visited_map[x][y-1]);
         
-        if(y + 1 < column and x + 1 < row and visited_map[x+1][y] != 0 and visited_map[x+1][y] != 2)
-            data.push_back(visited_map[x + 1][y + 1]);
+        if(y + 1 < column and x + 1 < row and visited_map[x+1][y+1] != 0 and visited_map[x+1][y+1] != 2)
+            data.push_back(visited_map[x+1][y+1]);
         
-        if(x - 1 > 0 and y - 1 > 0 and visited_map[x+1][y] != 0 and visited_map[x+1][y] != 2)
-            data.push_back(visited_map[x - 1][y - 1]);
+        if(x - 1 > 0 and y - 1 > 0 and visited_map[x-1][y-1] != 0 and visited_map[x-1][y-1] != 2)
+            data.push_back(visited_map[x-1][y-1]);
 
-        if(x - 1 > 0 and y + 1 < column and visited_map[x+1][y] != 0 and visited_map[x+1][y] != 2)
-           data.push_back(visited_map[x - 1][y + 1]);
+        if(x - 1 > 0 and y + 1 < column and visited_map[x-1][y+1] != 0 and visited_map[x-1][y+1] != 2)
+           data.push_back(visited_map[x-1][y+1]);
 
-        if(x + 1 < row and y - 1 > 0 and visited_map[x+1][y] != 0 and visited_map[x+1][y] != 2)
-            data.push_back(visited_map[x + 1][y - 1]);
+        if(x + 1 < row and y - 1 > 0 and visited_map[x+1][y-1] != 0 and visited_map[x+1][y-1] != 2)
+            data.push_back(visited_map[x+1][y-1]);
 
 
 
