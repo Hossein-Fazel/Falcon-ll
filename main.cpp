@@ -5,7 +5,7 @@
 
 void ride(Space_Ship ss, Map my_map)
 {
-    space_current sc = my_map.detect_sc(ss._get_Location()._X , ss._get_Location()._Y, -1, -1);
+    space_current sc = my_map.detect_sc(ss._get_Location()._X , ss._get_Location()._Y);
 
     if(sc.cell_counter != -1)
     {

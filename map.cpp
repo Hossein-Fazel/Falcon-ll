@@ -61,50 +61,48 @@ void Map::set_info(int x, int y)
     }
 }
 
-space_current Map::detect_sc(int x, int y, int pre_x, int pre_y)
+space_current Map::detect_sc(int x, int y)
 {
-    space_current ans;
+    if(x >= 7 or x < 0) return space_current{Location{x, y}, -1};
+    if(y >= 6 or y < 0) return space_current{Location{x, y}, -1};
+    if(main_map[x][y] != 1 and main_map[x][y] != 2) return space_current{Location{x, y}, -1};
+    if(main_map[x][y] == 0) return space_current{Location{x, y}, -1};
 
-    if(x + 1 < row and (main_map[x + 1][y] == 1 or main_map[x + 1][y] == 2) and !(x + 1 == pre_x and y == pre_y))
+    space_current ans, maxx;
+    maxx.cell_counter = -1;
+    int temp = main_map[x][y];
+    main_map[x][y] = -2;
+
+    ans = detect_sc(x + 1, y);
+    if(ans.cell_counter != -1)
     {
-        ans = detect_sc(x + 1, y, x ,y);
-        if(ans.cell_counter != -1)
-        {
-            ans.cell_counter++;
-            return ans;
-        }
+        ans.cell_counter++;
+        if(ans.cell_counter > maxx.cell_counter) maxx = ans;
     }
 
-    if(x - 1 >= 0 and (main_map[x - 1][y] == 1 or main_map[x - 1][y] == 2) and !(x - 1 == pre_x and y == pre_y))
+    ans = detect_sc(x - 1, y);
+    if(ans.cell_counter != -1)
     {
-        ans = detect_sc(x - 1, y, x ,y);
-        if(ans.cell_counter != -1)
-        {
-            ans.cell_counter++;
-            return ans;
-        }
+        ans.cell_counter++;
+        if(ans.cell_counter > maxx.cell_counter) maxx = ans;
     }
 
-    if(y + 1 < column and (main_map[x][y + 1] == 1 or main_map[x][y + 1] == 2) and !(x == pre_x and y + 1 == pre_y))
+    ans = detect_sc(x, y + 1);
+    if(ans.cell_counter != -1)
     {
-        ans = detect_sc(x, y + 1, x ,y);
-        if(ans.cell_counter != -1)
-        {
-            ans.cell_counter++;
-            return ans;
-        }
+        ans.cell_counter++;
+        if(ans.cell_counter > maxx.cell_counter) maxx = ans;
     }
 
-    if(y - 1 >= 0 and (main_map[x][y - 1] == 1 or main_map[x][y - 1] == 2) and !(x == pre_x and y - 1 == pre_y)) 
+    ans = detect_sc(x, y - 1);
+    if(ans.cell_counter != -1)
     {
-        ans = detect_sc(x, y - 1, x ,y);
-        if(ans.cell_counter != -1)
-        {
-            ans.cell_counter++;
-            return ans;
-        }
+        ans.cell_counter++;
+        if(ans.cell_counter > maxx.cell_counter) maxx = ans;
     }
-
+    main_map[x][y] = temp;
+    
+    if(maxx.cell_counter != -1) return maxx;
     if(main_map[x][y] == 1) return space_current{Location{x, y}, 0};
     return space_current{Location{0, 0}, -1};
 }

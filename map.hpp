@@ -20,7 +20,7 @@ class Map
         const vector<vector<int>> __get_main_map(){return main_map;};
         // can i do this? no its violates the principles of oop but with 'const', i think it could be better
         
-        space_current detect_sc(int x, int y, int pre_x, int pre_y);
+        space_current detect_sc(int x, int y);
 
 
     private:
