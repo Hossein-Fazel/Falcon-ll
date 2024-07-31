@@ -10,7 +10,7 @@ struct SaveThings
     Location __location; //from DataStruct__Func.hpp
     string _next_move;
     int _energy_left;
-    int _time_left;
+    int _elapsed_time;
     //What I See? variable
 };
 
@@ -18,7 +18,7 @@ class log_system
 {
     public:
         log_system();
-        void add(Location loc, string move);
+        void add(Location loc, string move, int energy, int time);
         void print();
 
     private:
