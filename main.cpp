@@ -175,7 +175,7 @@ int main()
         {
             space_ship._set_Location(home_x, home_y);
             space_ship._set_energy(space_ship._get_energy() - (abs(home_x - x) + abs(home_y - y)));
-            space_ship._set_energy(space_ship._get_energy() + (abs(home_x - x) + abs(home_y - y)));
+            space_ship._set_time(space_ship._get_time() + (abs(home_x - x) + abs(home_y - y)));
         }
         else if ( data.size() == 0)
         {
