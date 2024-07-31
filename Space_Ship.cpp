@@ -1,3 +1,4 @@
+#include <bits/stdc++.h>
 #include "Space_Ship.hpp"
 
 
@@ -39,10 +40,12 @@ int Space_Ship::_get_time()
 
 bool Space_Ship::_move(int up , int right)
 {
-    if( up + right != 0)
+    if( abs(up + right) != 0)
     {
-        this->_location._X += (right);
-        this->_location._Y += (up);
+        this->_location._Y += (right);
+        this->_location._X += (up);
+        this->_energy-=abs(up + right);
+        this->_time  += abs(up+right);
         return 1;
     }
     return 0;
