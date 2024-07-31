@@ -64,6 +64,7 @@ void worm_hole(Space_Ship ss , Map my_map)
                 if (my_map.__get_main_map()[i][j] == 4 && j != ss._get_Location()._Y && i != ss._get_Location()._X )
                 {
                     ss._set_Location(i,j);
+                    ss._set_energy(ss._get_energy() / 2);
                     return;
                 }
             }
