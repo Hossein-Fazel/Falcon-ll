@@ -74,6 +74,7 @@ void worm_hole(Space_Ship ss , Map my_map)
 int main()
 {
     vector<vector<int>> visited_map;
+    int home_x , home_y;
 
     Map space_map;
     int row, column, spaceShip_x, spaceShip_y, energy;
@@ -110,52 +111,73 @@ int main()
         {
             data.push_back(visited_map[x+1][y]); 
             is_home = 1;
+            home_x = x + 1;
+            home_y = y;
         }
 
         if(x - 1 > 0 and visited_map[x-1][y] != 0 and visited_map[x-1][y] != 2)
         {
             data.push_back(visited_map[x-1][y]);
             is_home = 1;
+            home_x = x - 1;
+            home_y = y;
         }
         
         if(y + 1 < column and visited_map[x][y+1] != 0 and visited_map[x][y+1] != 2)
         {
             data.push_back(visited_map[x][y+1]);
             is_home = 1;
+            home_x = x;
+            home_y = y + 1;
         }
         
         if(y - 1 > 0 and visited_map[x][y-1] != 0 and visited_map[x][y-1] != 2)
         {
             data.push_back(visited_map[x][y-1]);
             is_home = 1;
+            home_x = x;
+            home_y = y - 1;
         }
         
         if(y + 1 < column and x + 1 < row and visited_map[x+1][y+1] != 0 and visited_map[x+1][y+1] != 2)
         {
             data.push_back(visited_map[x+1][y+1]);
             is_home = 1;
+            home_x = x + 1;
+            home_y = y + 1;
         }
         
         if(x - 1 > 0 and y - 1 > 0 and visited_map[x-1][y-1] != 0 and visited_map[x-1][y-1] != 2)
         {
             data.push_back(visited_map[x-1][y-1]);
             is_home = 1;
+            home_x = x - 1;
+            home_y = y - 1;
         }
 
         if(x - 1 > 0 and y + 1 < column and visited_map[x-1][y+1] != 0 and visited_map[x-1][y+1] != 2)
         {
            data.push_back(visited_map[x-1][y+1]);
             is_home = 1;
+            home_x = x - 1;
+            home_y = y + 1;
         }
 
         if(x + 1 < row and y - 1 > 0 and visited_map[x+1][y-1] != 0 and visited_map[x+1][y-1] != 2)
         {
             data.push_back(visited_map[x+1][y-1]);
             is_home = 1;
+            home_x = x + 1;
+            home_y = y - 1;
         }
 
-
-        if ( data.size() == 0)
+        if(is_home)
+        {
+            space_ship._set_Location(home_x, home_y);
+            space_ship._set_energy(space_ship._get_energy() - (abs(home_x - x) + abs(home_y - y)));
+            space_ship._set_energy(space_ship._get_energy() + (abs(home_x - x) + abs(home_y - y)));
+        }
+        else if ( data.size() == 0)
         {
             bool is_moving{false};
             do
