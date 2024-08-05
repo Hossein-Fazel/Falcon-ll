@@ -5,6 +5,16 @@ log_system::log_system()
 {
 }
 
+bool log_system::_find_loc(int x , int y)
+{
+    for (int i{0} ; i < logs.size() ; ++i)
+    {
+        if (logs[i].__location._X == x ) return true;
+    }
+    return false;
+
+}
+
 void log_system::add(Location loc, string move, int energy, int time)
 {
     SaveThings temp;
