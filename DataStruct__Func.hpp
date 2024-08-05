@@ -13,4 +13,10 @@ struct space_current
     int cell_counter = 0;
 };
 
+struct view_point
+{
+    Location location;
+    int count_new_cells;
+};
+
 #endif
