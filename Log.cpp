@@ -9,7 +9,7 @@ bool log_system::_find_loc(int x , int y)
 {
     for (int i{0} ; i < logs.size() ; ++i)
     {
-        if (logs[i].__location._X == x ) return true;
+        if (logs[i].__location._X == x && logs[i].__location._Y == y ) return true;
     }
     return false;
 
