@@ -19,6 +19,7 @@ class log_system
     public:
         log_system();
         void add(Location loc, string move, int energy, int time);
+        bool _find_loc(int x ,int y);
         void print();
 
     private:
