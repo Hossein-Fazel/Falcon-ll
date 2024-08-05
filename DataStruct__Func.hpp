@@ -17,6 +17,8 @@ struct view_point
 {
     Location location;
     int count_new_cells;
+
+    bool operator<(const view_point& ins) { return count_new_cells > ins.count_new_cells;}
 };
 
 #endif

@@ -90,3 +90,74 @@ void controller::worm_hole(Space_Ship ss , Map my_map)
         }
     }
 }
+
+int controller::get_visible_new_cells(int curr_x, int curr_y, int next_x, int next_y)
+{
+    if(curr_x == row -1 or curr_y == column - 1 or curr_x == 0 or curr_y == 0)
+    {
+        cout << "t1\n";
+        // corners :
+        if(next_x == 0 and next_y == 0)
+            return 0;
+        
+        if(next_x == row - 1 and next_y == 0)
+            return 0;
+        
+        if(next_x == 0 and next_y == column - 1)
+            return 0;
+
+        if(next_x == row - 1 and next_y == column - 1)
+            return 0;
+
+        // edges : 
+        if(next_x == row - 1 or next_y == column - 1)
+            return 2;
+        if(next_x == 0 or next_y == 0)
+            return 2;
+        
+        //middle :
+        if(next_x > 0 and next_x < row - 1 and next_y > 0 and next_y < column - 1)
+            return 3;
+    }
+
+    else if(curr_x > 0 and curr_x < row - 1 and curr_y > 0 and curr_y < column - 1)
+    {
+        // edges :
+        if(next_x == row -1 or next_y == column - 1)
+            return 0;
+        if(next_x == 0 or next_y == 0)
+            return 0;
+        
+        // middle :
+        if(next_x > 0 and next_x < row - 1 and next_y > 0 and next_y < column - 1)
+            return 3;
+    }
+
+    return -1;
+}
+
+vector<view_point> controller::get_view_points()
+{
+    int x = space_ship._get_Location()._X;
+    int y = space_ship._get_Location()._Y;
+
+    vector<view_point> points;
+
+    int temp {};
+
+    temp = get_visible_new_cells(x, y, x + 1, y);
+    if(temp != -1) points.push_back(view_point{Location{x+1, y}, temp});
+
+    temp = get_visible_new_cells(x, y, x - 1, y);
+    if(temp != -1) points.push_back(view_point{Location{x-1, y}, temp});
+
+    temp = get_visible_new_cells(x, y, x, y + 1);
+    if(temp != -1) points.push_back(view_point{Location{x, y+1}, temp});
+
+    temp = get_visible_new_cells(x, y, x, y - 1);
+    if(temp != -1) points.push_back(view_point{Location{x, y-1}, temp});
+
+    sort(points.begin(), points.end());
+
+    return points;
+}

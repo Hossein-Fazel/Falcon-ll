@@ -7,6 +7,7 @@ using namespace std;
 #include "Space_Ship.hpp"
 #include "map.hpp"
 #include "Log.hpp"
+#include "DataStruct__Func.hpp"
 
 
 class controller
@@ -18,13 +19,15 @@ class controller
         Map space_map;
         Space_Ship space_ship{0,0,0,0};
         int row, column, spaceShip_x, spaceShip_y, energy;
-    
+
     public :
         controller(){};
         void run();
         void ride(Space_Ship ss, Map my_map);
         void space_object(Space_Ship ss , Map my_map);
         void worm_hole(Space_Ship ss , Map my_map);
+        int get_visible_new_cells(int curr_x, int curr_y, int next_x, int next_y);
+        vector<view_point> get_view_points();
 
 };
 
