@@ -163,6 +163,11 @@ vector<view_point> controller::get_view_points()
     return points;
 }
 
+bool controller::__visit_2_3_(int x , int y , vector<vector<int>> map)
+{
+    return map[x][y] == 2 || map[x][y] == 3 ? false : true;  
+}
+
 
 void controller::algo()
 {
@@ -175,11 +180,12 @@ void controller::algo()
 
         for(auto i : points)
         {
-            if(logs._find_loc(i.location._X, i.location._Y) == false)
+            if(!(logs._find_loc(i.location._X, i.location._Y)) && (__visit_2_3_(i.location._X , i.location._Y , visited_map)))
             {
                 space_ship._move(i.location._X - space_ship._get_Location()._X, i.location._Y - space_ship._get_Location()._Y);
                 string move = "move to x : " + to_string(i.location._X) + ", y : " + to_string(i.location._Y);
                 logs.add(Location{i.location._X, i.location._Y}, move, space_ship._get_energy(), space_ship._get_time());
+                break;
             }
         }
         _SLEEP(2);
