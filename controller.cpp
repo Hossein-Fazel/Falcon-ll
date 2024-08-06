@@ -20,7 +20,7 @@ void controller::run()
             space_map.set_data(i, j, cell_data);
         }
     }
-    algo();
+    algo(space_ship , space_map); // --------------------------------------------------------------------------------------------------
 }
 
 
@@ -169,10 +169,12 @@ bool controller::__visit_2_3_(int x , int y , vector<vector<int>> map)
 }
 
 
-void controller::algo()
+void controller::algo(Space_Ship ss , Map myMap)
 {
     while(1)
     {
+        bool flag_do_action {false};
+
         this->space_map.set_info(space_ship._get_Location()._X, space_ship._get_Location()._Y, visited_map);
         this->space_map.print(space_ship._get_Location()._X, space_ship._get_Location()._Y);
 
@@ -185,8 +187,31 @@ void controller::algo()
                 space_ship._move(i.location._X - space_ship._get_Location()._X, i.location._Y - space_ship._get_Location()._Y);
                 string move = "move to x : " + to_string(i.location._X) + ", y : " + to_string(i.location._Y);
                 logs.add(Location{i.location._X, i.location._Y}, move, space_ship._get_energy(), space_ship._get_time());
+                flag_do_action = true;  // ---------------------------------------------------------------------------------------------
                 break;
             }
+
+        }
+
+        // -------------------------------------------------
+        if (!flag_do_action)
+        {
+            if (visited_map[ss._get_Location()._X][ss._get_Location()._Y] == 4)
+            {
+                    worm_hole(ss , myMap);
+            }
+
+            else if (visited_map[ss._get_Location()._X][ss._get_Location()._Y] == 1)
+            {
+                    ride(ss , myMap);
+            }
+
+            else
+            {
+                    space_object(ss , myMap);
+            }
+
+     
         }
         _SLEEP(2);
     }
