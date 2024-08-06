@@ -20,7 +20,6 @@ void controller::run()
             space_map.set_data(i, j, cell_data);
         }
     }
-
     algo();
 }
 
@@ -95,9 +94,11 @@ void controller::worm_hole(Space_Ship ss , Map my_map)
 
 int controller::get_visible_new_cells(int curr_x, int curr_y, int next_x, int next_y)
 {
+    if(curr_x < 0 or curr_x >= row or curr_y < 0 or curr_y >= column ) return -1;
+    if(next_x < 0 or next_x >= row or next_y < 0 or next_y >= column ) return -1;
+    
     if(curr_x == row -1 or curr_y == column - 1 or curr_x == 0 or curr_y == 0)
     {
-        cout << "t1\n";
         // corners :
         if(next_x == 0 and next_y == 0)
             return 0;
@@ -134,8 +135,6 @@ int controller::get_visible_new_cells(int curr_x, int curr_y, int next_x, int ne
         if(next_x > 0 and next_x < row - 1 and next_y > 0 and next_y < column - 1)
             return 3;
     }
-
-    return -1;
 }
 
 vector<view_point> controller::get_view_points()
