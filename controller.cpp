@@ -20,6 +20,8 @@ void controller::run()
             space_map.set_data(i, j, cell_data);
         }
     }
+
+    algo();
 }
 
 
