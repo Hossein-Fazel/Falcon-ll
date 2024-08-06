@@ -21,6 +21,7 @@ class Map
         // can i do this? no its violates the principles of oop but with 'const', i think it could be better
         
         space_current detect_sc(int x, int y);
+        void print(int x, int y);
 
 
     private:

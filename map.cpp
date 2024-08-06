@@ -106,3 +106,20 @@ space_current Map::detect_sc(int x, int y)
     return space_current{Location{0, 0}, -1};
 }
 
+void Map::print(int x, int y)
+{
+    Clear();
+    for(int i = 0; i < row; i++)
+    {
+        for(int j = 0; j < column; j++)
+        {
+            if(i == x and j == y)
+            {
+                cout << "* ";
+                continue;
+            }
+            cout << main_map[i][j] << " ";
+        }
+        cout << '\n';
+    }
+}
