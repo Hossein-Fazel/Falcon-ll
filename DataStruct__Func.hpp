@@ -1,6 +1,16 @@
 #ifndef DATASTRUCT__FUNC_HPP
 #define DATASTRUCT__FUNC_HPP
 
+#ifdef _WIN32
+    #include <windows.h>
+    #define Clear() system("cls")
+#elif __linux__
+    #include <stdio.h>  
+    #define Clear() system("clear")
+#else
+    #error "Unsupported operating system"
+#endif
+
 struct Location
 {
     int _X;
