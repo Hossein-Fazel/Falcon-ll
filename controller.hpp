@@ -28,7 +28,7 @@ class controller
         void worm_hole(Space_Ship ss , Map my_map);
         int get_visible_new_cells(int curr_x, int curr_y, int next_x, int next_y);
         vector<view_point> get_view_points();
-
+        void algo();
 };
 
 #endif

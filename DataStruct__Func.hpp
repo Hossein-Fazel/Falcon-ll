@@ -4,9 +4,11 @@
 #ifdef _WIN32
     #include <windows.h>
     #define Clear() system("cls")
+    #define _SLEEP(seconds) Sleep(seconds * 1000)
 #elif __linux__
     #include <stdio.h>  
     #define Clear() system("clear")
+    #define _SLEEP(seconds) sleep(seconds)
 #else
     #error "Unsupported operating system"
 #endif

@@ -161,3 +161,26 @@ vector<view_point> controller::get_view_points()
 
     return points;
 }
+
+
+void controller::algo()
+{
+    while(1)
+    {
+        this->space_map.set_info(space_ship._get_Location()._X, space_ship._get_Location()._Y, visited_map);
+        this->space_map.print(space_ship._get_Location()._X, space_ship._get_Location()._Y);
+
+        vector<view_point> points = get_view_points();
+
+        for(auto i : points)
+        {
+            if(logs._find_loc(i.location._X, i.location._Y) == false)
+            {
+                space_ship._move(i.location._X - space_ship._get_Location()._X, i.location._Y - space_ship._get_Location()._Y);
+                string move = "move to x : " + to_string(i.location._X) + ", y : " + to_string(i.location._Y);
+                logs.add(Location{i.location._X, i.location._Y}, move, space_ship._get_energy(), space_ship._get_time());
+            }
+        }
+        _SLEEP(2);
+    }
+}
