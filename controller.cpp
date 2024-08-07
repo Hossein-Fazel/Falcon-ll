@@ -336,10 +336,10 @@ void controller::algo()
     string move = "move to home x : " + to_string(home_x) + ", y : " + to_string(home_y);
     logs.add(Location{space_ship._get_Location()._X, space_ship._get_Location()._Y}, move, space_ship._get_energy(), space_ship._get_time());
 
+    space_ship._set_Location(home_x, home_y);
     int temp = abs(home_x - space_ship._get_Location()._X) + abs(home_y - space_ship._get_Location()._Y);
     space_ship._set_energy(space_ship._get_energy() - temp);
     space_ship._set_time(space_ship._get_time() + temp);
-    space_ship._set_Location(home_x, home_y);
 
     logs.print();
 }
