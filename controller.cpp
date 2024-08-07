@@ -251,9 +251,10 @@ void controller::algo()
         {
             if(!(logs._find_loc(i.location._X, i.location._Y)) && !(__visit_2_3_(i.location._X , i.location._Y , visited_map)))
             {
-                space_ship._move(i.location._X - space_ship._get_Location()._X, i.location._Y - space_ship._get_Location()._Y);
                 string move = "move to x : " + to_string(i.location._X) + ", y : " + to_string(i.location._Y);
-                logs.add(Location{i.location._X, i.location._Y}, move, space_ship._get_energy(), space_ship._get_time());
+                logs.add(Location{space_ship._get_Location()._X, space_ship._get_Location()._Y}, move, space_ship._get_energy(), space_ship._get_time());
+                
+                space_ship._move(i.location._X - space_ship._get_Location()._X, i.location._Y - space_ship._get_Location()._Y);
                 flag_do_action = true;  // ---------------------------------------------------------------------------------------------
                 break;
             }
@@ -264,26 +265,39 @@ void controller::algo()
         {
             if (visited_map[this->space_ship._get_Location()._X][this->space_ship._get_Location()._Y] == 4)
             {
+                string move = "use wormhole";
+                logs.add(Location{space_ship._get_Location()._X, space_ship._get_Location()._Y}, move, space_ship._get_energy(), space_ship._get_time());
+
                 worm_hole(this->space_ship , this->space_map);
             }
 
             else if (visited_map[this->space_ship._get_Location()._X][this->space_ship._get_Location()._Y] == 1)
             {
+                string move = "use space current";
+                logs.add(Location{space_ship._get_Location()._X, space_ship._get_Location()._Y}, move, space_ship._get_energy(), space_ship._get_time());
+                
                 ride(this->space_ship , this->space_map);
             }
 
             else
             {
+                string move = "use space object";
+                logs.add(Location{space_ship._get_Location()._X, space_ship._get_Location()._Y}, move, space_ship._get_energy(), space_ship._get_time());
+                
                 space_object(this->space_ship , this->space_map);
             }
         }
         _SLEEP(1);
     }
 
+    string move = "move to home x : " + to_string(home_x) + ", y : " + to_string(home_y);
+    logs.add(Location{space_ship._get_Location()._X, space_ship._get_Location()._Y}, move, space_ship._get_energy(), space_ship._get_time());
+
     int temp = abs(home_x - space_ship._get_Location()._X) + abs(home_y - space_ship._get_Location()._Y);
     space_ship._set_energy(space_ship._get_energy() - temp);
     space_ship._set_time(space_ship._get_time() + temp);
     space_ship._set_Location(home_x, home_y);
+
 
     logs.print();
 }
