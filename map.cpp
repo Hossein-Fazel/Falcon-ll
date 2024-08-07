@@ -14,7 +14,7 @@ Map::Map(int x, int y)
 
 void Map::set_data(int x, int y, int data)
 {
-    if(x > 0 and x < this->row and y > 0 and y < this->column)
+    if(x >= 0 and x < this->row and y >= 0 and y < this->column)
     {
         this->main_map[x][y] = data;
     }
