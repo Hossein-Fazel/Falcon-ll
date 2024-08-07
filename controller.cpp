@@ -269,6 +269,7 @@ void controller::algo()
                 logs.add(Location{space_ship._get_Location()._X, space_ship._get_Location()._Y}, move, space_ship._get_energy(), space_ship._get_time());
 
                 worm_hole(this->space_ship , this->space_map);
+                flag_do_action = true;
             }
 
             else if (visited_map[this->space_ship._get_Location()._X][this->space_ship._get_Location()._Y] == 1)
@@ -277,16 +278,44 @@ void controller::algo()
                 logs.add(Location{space_ship._get_Location()._X, space_ship._get_Location()._Y}, move, space_ship._get_energy(), space_ship._get_time());
                 
                 ride(this->space_ship , this->space_map);
+                flag_do_action = true;
             }
 
             else
             {
-                string move = "use space object";
-                logs.add(Location{space_ship._get_Location()._X, space_ship._get_Location()._Y}, move, space_ship._get_energy(), space_ship._get_time());
-                
+                int temp_x = space_ship._get_Location()._X;
+                int temp_y = space_ship._get_Location()._Y;
+
                 space_object(this->space_ship , this->space_map);
+                
+                if(temp_x != space_ship._get_Location()._X or temp_y != space_ship._get_Location()._Y)
+                {
+                    string move = "use space object";
+                    logs.add(Location{temp_x, temp_y}, move, space_ship._get_energy(), space_ship._get_time());
+                    flag_do_action = true;
+                }
+                
             }
         }
+
+        if (!flag_do_action)
+        {
+            while(1)
+            {
+                srand(time(0));
+                view_point vp = points[rand() % points.size()];
+                if(!(__visit_2_3_(vp.location._X , vp.location._Y , visited_map)))
+                {
+                    string move = "move to x : " + to_string(vp.location._X) + ", y : " + to_string(vp.location._Y);
+                    logs.add(Location{space_ship._get_Location()._X, space_ship._get_Location()._Y}, move, space_ship._get_energy(), space_ship._get_time());
+                    
+                    space_ship._move(vp.location._X - space_ship._get_Location()._X, vp.location._Y - space_ship._get_Location()._Y);
+                    flag_do_action = true;  // ---------------------------------------------------------------------------------------------
+                    break;
+                }
+            }
+        }
+
         _SLEEP(3);
     }
 
