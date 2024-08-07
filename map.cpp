@@ -28,35 +28,35 @@ int Map::get_data(int x, int y)
     }
 }
 
-void Map::set_info(int x, int y , vector<vector<int>> & visited_map)
+void Map::set_info(int x, int y , vector<vector<int>>& visited_map)
 {
-    if(x > 0 and x < this->row and y > 0 and y < this->column)
+    if(x >= 0 and x < this->row and y >= 0 and y < this->column)
     {
         visited_map[x][y] = main_map[x][y];
 
         if(x + 1 < row)
             visited_map[x+1][y] = main_map[x+1][y];
         
-        if(x - 1 > 0)
+        if(x - 1 >= 0)
             visited_map[x-1][y] = main_map[x-1][y];
         
         if(y + 1 < column)
             visited_map[x][y + 1] = main_map[x][y + 1];
         
-        if(y - 1 > 0)
+        if(y - 1 >= 0)
             visited_map[x][y - 1] = main_map[x][y - 1];
         
         if(y + 1 < column and x + 1 < row)
             visited_map[x + 1][y + 1] = main_map[x + 1][y + 1];
         
-        if(x - 1 > 0 and y - 1 > 0)
+        if(x - 1 >= 0 and y - 1 >= 0)
             visited_map[x - 1][y - 1] = main_map[x - 1][y - 1];
 
-        if(x - 1 > 0 and y + 1 < column)
+        if(x - 1 >= 0 and y + 1 < column)
             visited_map[x - 1][y + 1] = main_map[x - 1][y + 1];
 
-        if(x + 1 < row and y - 1 > 0)
-            visited_map[x + 1][y - 1] = main_map[x][y - 1];
+        if(x + 1 < row and y - 1 >= 0)
+            visited_map[x + 1][y - 1] = main_map[x + 1][y - 1];
     }
 }
 
