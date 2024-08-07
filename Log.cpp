@@ -28,6 +28,7 @@ void log_system::add(Location loc, string move, int energy, int time)
 
 void log_system::print()
 {
+    Clear();
     for(const auto item : this->logs)
     {
         cout << "Current Location :  " << "x = " << item.__location._X << ",  y = " << item.__location._Y << endl;
