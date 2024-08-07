@@ -40,7 +40,7 @@ void controller::ride(Space_Ship& ss, Map& my_map)
 
 void controller::space_object(Space_Ship& ss , Map& my_map)
 {
-    if(my_map.__get_main_map()[ss._get_Location()._X + 1][ss._get_Location()._Y] == 3)
+    if(ss._get_Location()._X + 1 < row and my_map.__get_main_map()[ss._get_Location()._X + 1][ss._get_Location()._Y] == 3)
     {
         ss._set_Location(ss._get_Location()._X + 3 , ss._get_Location()._Y );
         ss._set_energy(ss._get_energy() - 12);
@@ -48,7 +48,7 @@ void controller::space_object(Space_Ship& ss , Map& my_map)
         return;
     } 
 
-    if(my_map.__get_main_map()[ss._get_Location()._X - 1][ss._get_Location()._Y] == 3)
+    if(ss._get_Location()._X - 1 >= 0 and my_map.__get_main_map()[ss._get_Location()._X - 1][ss._get_Location()._Y] == 3)
     {
         ss._set_Location(ss._get_Location()._X - 3 , ss._get_Location()._Y );
         ss._set_energy(ss._get_energy() - 12); 
@@ -56,7 +56,7 @@ void controller::space_object(Space_Ship& ss , Map& my_map)
         return;
     } 
 
-    if(my_map.__get_main_map()[ss._get_Location()._X][ss._get_Location()._Y + 1] == 3)
+    if(ss._get_Location()._Y + 1 < column and my_map.__get_main_map()[ss._get_Location()._X][ss._get_Location()._Y + 1] == 3)
     {
         ss._set_Location(ss._get_Location()._X , ss._get_Location()._Y - 3);
         ss._set_energy(ss._get_energy() - 12); 
@@ -64,7 +64,7 @@ void controller::space_object(Space_Ship& ss , Map& my_map)
         return;
     } 
 
-    if(my_map.__get_main_map()[ss._get_Location()._X][ss._get_Location()._Y-1] == 3)
+    if(ss._get_Location()._Y - 1 >= 0 and my_map.__get_main_map()[ss._get_Location()._X][ss._get_Location()._Y-1] == 3)
     {
         ss._set_Location(ss._get_Location()._X , ss._get_Location()._Y +3);
         ss._set_energy(ss._get_energy() - 12); 
@@ -287,7 +287,7 @@ void controller::algo()
                 space_object(this->space_ship , this->space_map);
             }
         }
-        _SLEEP(1);
+        _SLEEP(3);
     }
 
     string move = "move to home x : " + to_string(home_x) + ", y : " + to_string(home_y);
@@ -297,7 +297,6 @@ void controller::algo()
     space_ship._set_energy(space_ship._get_energy() - temp);
     space_ship._set_time(space_ship._get_time() + temp);
     space_ship._set_Location(home_x, home_y);
-
 
     logs.print();
 }
