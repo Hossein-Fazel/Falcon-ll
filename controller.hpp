@@ -30,6 +30,8 @@ class controller
         bool __visit_2_3_(int x , int y , vector<vector<int>>& map);
         vector<view_point> get_view_points();
         void algo();
+
+        bool is_home(int& home_x, int& home_y);
 };
 
 #endif

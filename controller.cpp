@@ -168,10 +168,77 @@ bool controller::__visit_2_3_(int x , int y , vector<vector<int>>& map)
     return map[x][y] == 2 || map[x][y] == 3 ? true : false;  
 }
 
+bool controller::is_home(int& home_x, int& home_y)
+{
+    int x = space_ship._get_Location()._X;
+    int y = space_ship._get_Location()._Y;
+
+    if(x + 1 < row and visited_map[x+1][y] == 5)
+    {
+        home_x = x + 1;
+        home_y = y;
+        return 1;
+    }
+        
+    
+    if(x - 1 >= 0 and visited_map[x-1][y] == 5)
+    {
+        home_x = x - 1;
+        home_y = y;
+        return 1;
+    } 
+    
+    if(y + 1 < column and visited_map[x][y + 1] == 5)
+    {
+        home_x = x;
+        home_y = y + 1;
+        return 1;
+    }
+        
+    
+    if(y - 1 >= 0 and visited_map[x][y - 1] == 5)
+    {
+        home_x = x;
+        home_y = y - 1;
+        return 1;
+    }
+           
+    if(y + 1 < column and x + 1 < row and visited_map[x + 1][y + 1] == 5)
+    {
+        home_x = x + 1;
+        home_y = y + 1;
+        return 1;
+    }
+    
+    if(x - 1 >= 0 and y - 1 >= 0 and visited_map[x - 1][y - 1] == 5)
+    {
+        home_x = x - 1;
+        home_y = y - 1;
+        return 1;
+    }
+        
+    if(x - 1 >= 0 and y + 1 < column and visited_map[x - 1][y + 1] == 5)
+    {
+        home_x = x - 1;
+        home_y = y + 1;
+        return 1;
+    }
+
+    if(x + 1 < row and y - 1 >= 0 and visited_map[x + 1][y - 1] == 5)
+    {
+        home_x = x + 1;
+        home_y = y - 1;
+        return 1;
+    }
+
+    return 0; 
+}
+
 
 void controller::algo()
 {
-    while(1)
+    int home_x= -1 , home_y = -1;
+    while(!is_home(home_x, home_y))
     {
         bool flag_do_action {false};
 
@@ -211,6 +278,6 @@ void controller::algo()
                 space_object(this->space_ship , this->space_map);
             }
         }
-        _SLEEP(2);
+        _SLEEP(1);
     }
 }
