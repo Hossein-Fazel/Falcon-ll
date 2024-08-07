@@ -24,7 +24,7 @@ void controller::run()
 }
 
 
-void controller::ride(Space_Ship ss, Map my_map)
+void controller::ride(Space_Ship& ss, Map& my_map)
 {
     space_current sc = my_map.detect_sc(ss._get_Location()._X , ss._get_Location()._Y);
 
@@ -38,7 +38,7 @@ void controller::ride(Space_Ship ss, Map my_map)
     }
 }
 
-void controller::space_object(Space_Ship ss , Map my_map)
+void controller::space_object(Space_Ship& ss , Map& my_map)
 {
     if(my_map.__get_main_map()[ss._get_Location()._X + 1][ss._get_Location()._Y] == 3)
     {
@@ -73,7 +73,7 @@ void controller::space_object(Space_Ship ss , Map my_map)
     }
 }
 
-void controller::worm_hole(Space_Ship ss , Map my_map)
+void controller::worm_hole(Space_Ship& ss , Map& my_map)
 {
     if (my_map.__get_main_map()[ss._get_Location()._X][ss._get_Location()._Y] == 4)
     {
@@ -163,9 +163,9 @@ vector<view_point> controller::get_view_points()
     return points;
 }
 
-bool controller::__visit_2_3_(int x , int y , vector<vector<int>> map)
+bool controller::__visit_2_3_(int x , int y , vector<vector<int>>& map)
 {
-    return map[x][y] == 2 || map[x][y] == 3 ? false : true;  
+    return map[x][y] == 2 || map[x][y] == 3 ? true : false;  
 }
 
 
@@ -182,7 +182,7 @@ void controller::algo(Space_Ship ss , Map myMap)
 
         for(auto i : points)
         {
-            if(!(logs._find_loc(i.location._X, i.location._Y)) && (__visit_2_3_(i.location._X , i.location._Y , visited_map)))
+            if(!(logs._find_loc(i.location._X, i.location._Y)) && !(__visit_2_3_(i.location._X , i.location._Y , visited_map)))
             {
                 space_ship._move(i.location._X - space_ship._get_Location()._X, i.location._Y - space_ship._get_Location()._Y);
                 string move = "move to x : " + to_string(i.location._X) + ", y : " + to_string(i.location._Y);
@@ -198,20 +198,18 @@ void controller::algo(Space_Ship ss , Map myMap)
         {
             if (visited_map[ss._get_Location()._X][ss._get_Location()._Y] == 4)
             {
-                    worm_hole(ss , myMap);
+                worm_hole(ss , myMap);
             }
 
             else if (visited_map[ss._get_Location()._X][ss._get_Location()._Y] == 1)
             {
-                    ride(ss , myMap);
+                ride(ss , myMap);
             }
 
             else
             {
-                    space_object(ss , myMap);
+                space_object(ss , myMap);
             }
-
-     
         }
         _SLEEP(2);
     }
