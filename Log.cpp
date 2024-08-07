@@ -39,3 +39,12 @@ void log_system::print()
         cout << "_______________________________________________ \n\n";
     }
 }
+
+bool log_system::check_last(int x, int y)
+{
+    if(logs.size() != 0)
+    {
+        if(logs[logs.size() - 1].__location._X == x and logs[logs.size() - 1].__location._Y == y) return 1;
+        else return false;
+    }
+}

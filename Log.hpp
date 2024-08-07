@@ -20,6 +20,7 @@ class log_system
         log_system();
         void add(Location loc, string move, int energy, int time);
         bool _find_loc(int x ,int y);
+        bool check_last(int x, int y);
         void print();
 
     private:

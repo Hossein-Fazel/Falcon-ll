@@ -238,6 +238,7 @@ bool controller::is_home(int& home_x, int& home_y)
 void controller::algo()
 {
     int home_x= -1 , home_y = -1;
+    bool is_first = true;
     while(!is_home(home_x, home_y))
     {
         bool flag_do_action {false};
@@ -247,6 +248,7 @@ void controller::algo()
 
         vector<view_point> points = get_view_points();
 
+        // normal move
         for(auto i : points)
         {
             if(!(logs._find_loc(i.location._X, i.location._Y)) && !(__visit_2_3_(i.location._X , i.location._Y , visited_map)))
@@ -255,12 +257,13 @@ void controller::algo()
                 logs.add(Location{space_ship._get_Location()._X, space_ship._get_Location()._Y}, move, space_ship._get_energy(), space_ship._get_time());
                 
                 space_ship._move(i.location._X - space_ship._get_Location()._X, i.location._Y - space_ship._get_Location()._Y);
-                flag_do_action = true;  // ---------------------------------------------------------------------------------------------
+                flag_do_action = true;
+                is_first = true;
                 break;
             }
         }
 
-        // -------------------------------------------------
+        // use objects
         if (!flag_do_action)
         {
             if (visited_map[this->space_ship._get_Location()._X][this->space_ship._get_Location()._Y] == 4)
@@ -270,6 +273,7 @@ void controller::algo()
 
                 worm_hole(this->space_ship , this->space_map);
                 flag_do_action = true;
+                is_first = true;
             }
 
             else if (visited_map[this->space_ship._get_Location()._X][this->space_ship._get_Location()._Y] == 1)
@@ -279,6 +283,7 @@ void controller::algo()
                 
                 ride(this->space_ship , this->space_map);
                 flag_do_action = true;
+                is_first = true;
             }
 
             else
@@ -293,30 +298,37 @@ void controller::algo()
                     string move = "use space object";
                     logs.add(Location{temp_x, temp_y}, move, space_ship._get_energy(), space_ship._get_time());
                     flag_do_action = true;
+                    is_first = true;
                 }
                 
             }
         }
 
+        // random move
         if (!flag_do_action)
         {
             while(1)
             {
                 srand(time(0));
                 view_point vp = points[rand() % points.size()];
-                if(!(__visit_2_3_(vp.location._X , vp.location._Y , visited_map)))
+
+                bool check;
+                if(is_first) check = !(__visit_2_3_(vp.location._X , vp.location._Y , visited_map));
+                else check = !(__visit_2_3_(vp.location._X , vp.location._Y , visited_map)) and !logs.check_last(vp.location._X , vp.location._Y);
+
+                if(check)
                 {
                     string move = "move to x : " + to_string(vp.location._X) + ", y : " + to_string(vp.location._Y);
                     logs.add(Location{space_ship._get_Location()._X, space_ship._get_Location()._Y}, move, space_ship._get_energy(), space_ship._get_time());
                     
                     space_ship._move(vp.location._X - space_ship._get_Location()._X, vp.location._Y - space_ship._get_Location()._Y);
-                    flag_do_action = true;  // ---------------------------------------------------------------------------------------------
+                    flag_do_action = true;
+                    is_first = false;
                     break;
                 }
             }
         }
-
-        _SLEEP(3);
+        _SLEEP(1);
     }
 
     string move = "move to home x : " + to_string(home_x) + ", y : " + to_string(home_y);
