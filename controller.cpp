@@ -173,6 +173,8 @@ bool controller::is_home(int& home_x, int& home_y)
     int x = space_ship._get_Location()._X;
     int y = space_ship._get_Location()._Y;
 
+    this->space_map.set_info(x, y, this->visited_map);
+
     if(x + 1 < row and visited_map[x+1][y] == 5)
     {
         home_x = x + 1;
