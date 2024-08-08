@@ -48,3 +48,12 @@ bool log_system::check_last(int x, int y)
         else return false;
     }
 }
+
+bool log_system::check_last(string str)
+{
+    if(logs.size() != 0)
+    {
+        if(logs[logs.size() - 1]._next_move == str) return true;
+        else return false;
+    }
+}

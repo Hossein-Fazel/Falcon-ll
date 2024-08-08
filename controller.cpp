@@ -58,7 +58,7 @@ void controller::space_object(Space_Ship& ss , Map& my_map)
 
     if(ss._get_Location()._Y + 1 < column and my_map.__get_main_map()[ss._get_Location()._X][ss._get_Location()._Y + 1] == 3)
     {
-        ss._set_Location(ss._get_Location()._X , ss._get_Location()._Y - 3);
+        ss._set_Location(ss._get_Location()._X , ss._get_Location()._Y + 3);
         ss._set_energy(ss._get_energy() - 12); 
         ss._set_time  (ss._get_time() + 9);
         return;
@@ -66,7 +66,7 @@ void controller::space_object(Space_Ship& ss , Map& my_map)
 
     if(ss._get_Location()._Y - 1 >= 0 and my_map.__get_main_map()[ss._get_Location()._X][ss._get_Location()._Y-1] == 3)
     {
-        ss._set_Location(ss._get_Location()._X , ss._get_Location()._Y +3);
+        ss._set_Location(ss._get_Location()._X , ss._get_Location()._Y - 3);
         ss._set_energy(ss._get_energy() - 12); 
         ss._set_time  (ss._get_time() + 9);
         return;
@@ -268,7 +268,7 @@ void controller::algo()
         // use objects
         if (!flag_do_action)
         {
-            if (visited_map[this->space_ship._get_Location()._X][this->space_ship._get_Location()._Y] == 4)
+            if (visited_map[this->space_ship._get_Location()._X][this->space_ship._get_Location()._Y] == 4 and logs.check_last("use wormhole") == false)
             {
                 string move = "use wormhole";
                 logs.add(Location{space_ship._get_Location()._X, space_ship._get_Location()._Y}, move, space_ship._get_energy(), space_ship._get_time());
@@ -278,7 +278,7 @@ void controller::algo()
                 is_first = true;
             }
 
-            else if (visited_map[this->space_ship._get_Location()._X][this->space_ship._get_Location()._Y] == 1)
+            else if (visited_map[this->space_ship._get_Location()._X][this->space_ship._get_Location()._Y] == 1 and logs.check_last("use space current") == false)
             {
                 string move = "use space current";
                 logs.add(Location{space_ship._get_Location()._X, space_ship._get_Location()._Y}, move, space_ship._get_energy(), space_ship._get_time());
@@ -288,7 +288,7 @@ void controller::algo()
                 is_first = true;
             }
 
-            else
+            else if(logs.check_last("use space object") == false)
             {
                 int temp_x = space_ship._get_Location()._X;
                 int temp_y = space_ship._get_Location()._Y;
@@ -302,7 +302,6 @@ void controller::algo()
                     flag_do_action = true;
                     is_first = true;
                 }
-                
             }
         }
 
@@ -311,8 +310,19 @@ void controller::algo()
         {
             while(1)
             {
+                // cout << "t1";
                 srand(time(0));
-                view_point vp = points[rand() % points.size()];
+                view_point vp;
+                try
+                {
+                    vp = points[rand() % points.size()];
+                }
+                catch(const std::exception& e)
+                {
+                    cout << "shittttt...";
+                    exit(0);
+                }
+                
 
                 bool check;
                 if(is_first) check = !(__visit_2_3_(vp.location._X , vp.location._Y , visited_map));
