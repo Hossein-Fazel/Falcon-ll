@@ -62,8 +62,8 @@ void Map::set_info(int x, int y , vector<vector<int>>& visited_map)
 
 space_current Map::detect_sc(int x, int y)
 {
-    if(x >= 7 or x < 0) return space_current{Location{x, y}, -1};
-    if(y >= 6 or y < 0) return space_current{Location{x, y}, -1};
+    if(x >= row or x < 0) return space_current{Location{x, y}, -1};
+    if(y >= column or y < 0) return space_current{Location{x, y}, -1};
     if(main_map[x][y] != 1 and main_map[x][y] != 2) return space_current{Location{x, y}, -1};
     if(main_map[x][y] == 0) return space_current{Location{x, y}, -1};
 
